@@ -2,7 +2,11 @@ import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-function MenuItemForm({initialContents, submitAction, buttonLabel = "Create"}) {
+function MenuItemForm({
+  initialContents,
+  submitAction,
+  buttonLabel = "Create",
+}) {
   // Stryker disable all
   const {
     register,
@@ -30,8 +34,8 @@ function MenuItemForm({initialContents, submitAction, buttonLabel = "Create"}) {
           />
         </Form.Group>
       )}
-      
-    <Form.Group className="mb-3">
+
+      <Form.Group className="mb-3">
         <Form.Label htmlFor="diningCommonsCode">Dining Commons Code</Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-diningCommonsCode"}
@@ -51,7 +55,7 @@ function MenuItemForm({initialContents, submitAction, buttonLabel = "Create"}) {
         </Form.Control.Feedback>
       </Form.Group>
 
-    <Form.Group className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Label htmlFor="name">Name</Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-name"}
@@ -71,7 +75,7 @@ function MenuItemForm({initialContents, submitAction, buttonLabel = "Create"}) {
         </Form.Control.Feedback>
       </Form.Group>
 
-    <Form.Group className="mb-3">
+      <Form.Group className="mb-3">
         <Form.Label htmlFor="station">Station</Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-station"}
