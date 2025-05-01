@@ -43,11 +43,7 @@ function MenuItemForm({
           type="text"
           isInvalid={Boolean(errors.diningCommonsCode)}
           {...register("diningCommonsCode", {
-            required: "Dining Commons Code is required.",
-            maxLength: {
-              value: 255,
-              message: "Max length 255 characters",
-            },
+            required: "Dining Commons Code is required",
           })}
         />
         <Form.Control.Feedback type="invalid">
