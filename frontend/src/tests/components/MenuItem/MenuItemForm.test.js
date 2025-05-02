@@ -54,6 +54,11 @@ describe("MenuItemForm tests", () => {
 
     expect(await screen.findByTestId(`${testId}-id`)).toBeInTheDocument();
     expect(screen.getByText(`Id`)).toBeInTheDocument();
+
+    expect(screen.getByLabelText("Id")).toHaveValue(String(MenuItemFixtures.oneMenuItem.id))
+    expect(screen.getByLabelText("Dining Commons Code")).toHaveValue(MenuItemFixtures.oneMenuItem.diningCommonsCode)
+    expect(screen.getByLabelText("Name")).toHaveValue(MenuItemFixtures.oneMenuItem.name)
+    expect(screen.getByLabelText("Station")).toHaveValue(MenuItemFixtures.oneMenuItem.station)
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
