@@ -53,13 +53,13 @@ function HelpRequestForm({
           {...register("requesterEmail", {
             required: "Requester Email is required.",
             maxLength: {
-              value: 255,
+              value: 30,
               message: "Max length 255 characters",
             },
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.helpRequest?.message}
+          {errors.requesterEmail?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
