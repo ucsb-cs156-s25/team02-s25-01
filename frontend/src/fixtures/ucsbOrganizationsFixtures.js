@@ -22,9 +22,9 @@ const ucsbOrganizationFixtures = {
       inactive: false,
     },
     {
-      orgCode: "CES",
-      orgTranslationShort: "Student Career Center"
-      orgTranslation: "Office of Student Career Center",
+      orgCode: "SRB",
+      orgTranslationShort: "Student Resource",
+      orgTranslation: "Office of Student Resource",
       inactive: false,
     },
   ],
