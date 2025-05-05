@@ -61,9 +61,9 @@ function MenuItemReviewForm({
           {...register("reviewerEmail", {
             required: "reviewerEmail is required.",
             maxLength: {
-                value: 254,
-                message: "Max length 254 characters",
-              },
+              value: 254,
+              message: "Max length 254 characters",
+            },
           })}
         />
         <Form.Control.Feedback type="invalid">
