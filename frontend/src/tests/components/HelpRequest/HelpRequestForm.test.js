@@ -64,10 +64,18 @@ describe("HelpRequestForm tests", () => {
     expect(await screen.findByTestId(`${testId}-id`)).toBeInTheDocument();
     expect(screen.getByText(`Id`)).toBeInTheDocument();
 
-    expect(screen.getByLabelText(`Id`)).toHaveValue(String(helpRequestFixtures.oneHelpRequest.id));
-    expect(screen.getByLabelText(`Team Id`)).toHaveValue(helpRequestFixtures.oneHelpRequest.teamId);
-    expect(screen.getByLabelText(`Table Or Breakout Room`)).toHaveValue(helpRequestFixtures.oneHelpRequest.tableOrBreakoutRoom);
-    expect(screen.getByLabelText(`Explanation`)).toHaveValue(helpRequestFixtures.oneHelpRequest.explanation);
+    expect(screen.getByLabelText(`Id`)).toHaveValue(
+      String(helpRequestFixtures.oneHelpRequest.id),
+    );
+    expect(screen.getByLabelText(`Team Id`)).toHaveValue(
+      helpRequestFixtures.oneHelpRequest.teamId,
+    );
+    expect(screen.getByLabelText(`Table Or Breakout Room`)).toHaveValue(
+      helpRequestFixtures.oneHelpRequest.tableOrBreakoutRoom,
+    );
+    expect(screen.getByLabelText(`Explanation`)).toHaveValue(
+      helpRequestFixtures.oneHelpRequest.explanation,
+    );
     expect(screen.getByLabelText(`Solved`)).toBeChecked();
   });
 
