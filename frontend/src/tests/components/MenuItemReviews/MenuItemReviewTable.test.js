@@ -17,8 +17,22 @@ jest.mock("react-router-dom", () => ({
 describe("MenuItemReviewTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["id", "Item Id", "Reviewer Email", "Stars", "Date Reviewed", "Comments"];
-  const expectedFields = ["id", "itemId", "reviewerEmail", "stars", "dateReviewed", "comments"];
+  const expectedHeaders = [
+    "id",
+    "Item Id",
+    "Reviewer Email",
+    "Stars",
+    "Date Reviewed",
+    "Comments",
+  ];
+  const expectedFields = [
+    "id",
+    "itemId",
+    "reviewerEmail",
+    "stars",
+    "dateReviewed",
+    "comments",
+  ];
   const testId = "MenuItemReviewTable";
 
   test("renders empty table correctly", () => {
