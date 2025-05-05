@@ -49,18 +49,17 @@ export default function MenuItemReviewTable({
       accessor: "reviewerEmail",
     },
     {
-        Header: "Stars",
-        accessor: "stars",
+      Header: "Stars",
+      accessor: "stars",
     },
     {
-        Header: "Date Reviewed",
-        accessor: "dateReviewed",
+      Header: "Date Reviewed",
+      accessor: "dateReviewed",
     },
     {
-        Header: "Comments",
-        accessor: "comments",
+      Header: "Comments",
+      accessor: "comments",
     },
-      
   ];
 
   if (hasRole(currentUser, "ROLE_ADMIN")) {
