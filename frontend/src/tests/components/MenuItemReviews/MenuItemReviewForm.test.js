@@ -80,7 +80,7 @@ describe("MenuItemReviewForm tests", () => {
     await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith(-1));
   });
 
-  test("that the correct validations are performed", async () => {
+  test("that the correct validations are performed - Reviewer Email", async () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
@@ -101,6 +101,36 @@ describe("MenuItemReviewForm tests", () => {
 
     const reviewerEmailInput = screen.getByTestId(`${testId}-reviewerEmail`);
     fireEvent.change(reviewerEmailInput, {
+      target: { value: "a".repeat(256) },
+    });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument();
+    });
+  });
+
+  test("that the correct validations are performed - comments", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <MenuItemReviewForm />
+        </Router>
+      </QueryClientProvider>,
+    );
+
+    expect(await screen.findByText(/Create/)).toBeInTheDocument();
+    const submitButton = screen.getByText(/Create/);
+    fireEvent.click(submitButton);
+
+    await screen.findByText(/ItemId is required/);
+    expect(screen.getByText(/ReviewerEmail is required/)).toBeInTheDocument();
+    expect(screen.getByText(/Stars is required/)).toBeInTheDocument();
+    expect(screen.getByText(/DateReviewed is required/)).toBeInTheDocument();
+    expect(screen.getByText(/Comments is required/)).toBeInTheDocument();
+
+    const commentsInput = screen.getByTestId(`${testId}-comments`);
+    fireEvent.change(commentsInput, {
       target: { value: "a".repeat(256) },
     });
     fireEvent.click(submitButton);
