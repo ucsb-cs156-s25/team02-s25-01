@@ -44,15 +44,15 @@ function MenuItemReviewForm({
         <Form.Label htmlFor="itemId">ItemId</Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-itemId"}
-          id="itemID"
+          id="itemId"
           type="int"
-          isInvalid={Boolean(errors.itemID)}
+          isInvalid={Boolean(errors.itemId)}
           {...register("itemId", {
-            required: "ItemID is required.",
+            required: "ItemId is required.",
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.itemID?.message}
+          {errors.itemId?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
@@ -64,10 +64,10 @@ function MenuItemReviewForm({
           type="text"
           isInvalid={Boolean(errors.reviewerEmail)}
           {...register("reviewerEmail", {
-            required: "reviewerEmail is required.",
+            required: "ReviewerEmail is required.",
             maxLength: {
-              value: 254,
-              message: "Max length 254 characters",
+              value: 255,
+              message: "Max length 255 characters",
             },
           })}
         />
@@ -84,7 +84,7 @@ function MenuItemReviewForm({
           type="int"
           isInvalid={Boolean(errors.stars)}
           {...register("stars", {
-            required: "stars is required.",
+            required: "Stars is required.",
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -119,10 +119,10 @@ function MenuItemReviewForm({
           type="text"
           isInvalid={Boolean(errors.comments)}
           {...register("comments", {
-            required: "comments is required.",
+            required: "Comments is required.",
             maxLength: {
-              value: 254,
-              message: "Max length 254 characters",
+              value: 255,
+              message: "Max length 255 characters",
             },
           })}
         />
