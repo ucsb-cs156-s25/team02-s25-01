@@ -16,9 +16,7 @@ export default function MenuItemCreatePage({ storybook = false }) {
   });
 
   const onSuccess = (menuItem) => {
-    toast(
-      `New menu Item Created - id: ${menuItem.id} name: ${menuItem.name}`,
-    );
+    toast(`New menu Item Created - id: ${menuItem.id} name: ${menuItem.name}`);
   };
 
   const mutation = useBackendMutation(
