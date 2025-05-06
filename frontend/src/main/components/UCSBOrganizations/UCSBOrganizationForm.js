@@ -94,7 +94,7 @@ function UCSBOrganizationForm({
       <Button type="submit" data-testid={testIdPrefix + "-submit"}>
         {buttonLabel}
       </Button>
-      <Button 
+      <Button
         variant="Secondary"
         onClick={() => navigate(-1)}
         data-testid={testIdPrefix + "-cancel"}
