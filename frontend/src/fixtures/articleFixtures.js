@@ -1,5 +1,5 @@
 const articleFixtures = {
-  oneFixture: {
+  oneArticle: {
     id: 1,
     title: "title0",
     url: "apple.com",
@@ -7,7 +7,7 @@ const articleFixtures = {
     email: "apple@gmail.com",
     dateAdded: "2025-05-02T03:39:16.131Z",
   },
-  threeDates: [
+  threeArticles: [
     {
       id: 2,
       title: "title1",
