@@ -1,6 +1,6 @@
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 
-export default function MenuItemsEditPage() {
+export default function PlaceholderEditPage() {
   // Stryker disable all : placeholder for future implementation
   return (
     <BasicLayout>
