@@ -26,7 +26,7 @@ export default function MenuItemIndexPage() {
       return (
         <Button
           variant="primary"
-          href="/menuItem/create"
+          href="/menuItems/create"
           style={{ float: "right" }}
         >
           Create Menu Item
