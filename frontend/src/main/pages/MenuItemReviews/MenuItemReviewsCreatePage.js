@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 export default function MenuItemReviewCreatePage({ storybook = false }) {
   const objectToAxiosParams = (menuItemReview) => ({
-    url: "/api/menuitemreview/post",  //So I don't know why it's menuitemreview vs the expected menuItemReviews, Tbd?
+    url: "/api/menuitemreview/post", //So I don't know why it's menuitemreview vs the expected menuItemReviews, Tbd?
     method: "POST",
     params: {
       id: menuItemReview.id,
@@ -20,7 +20,7 @@ export default function MenuItemReviewCreatePage({ storybook = false }) {
 
   const onSuccess = (menuItemReview) => {
     toast(
-      `New menuItemReview Created - id: ${menuItemReview.id} name: ${menuItemReview.name}`,
+      `New menuItemReview Created - id: ${menuItemReview.id} itemId: ${menuItemReview.itemId}`,
     );
   };
 
