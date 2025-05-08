@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/MenuItemReviews/MenuItemReviewForm.js</title>
+    <title>Code coverage report for components/HelpRequest/HelpRequestForm.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/MenuItemReviews</a> MenuItemReviewForm.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/HelpRequest</a> HelpRequestForm.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -206,7 +206,20 @@
 <a name='L141'></a><a href='#L141'>141</a>
 <a name='L142'></a><a href='#L142'>142</a>
 <a name='L143'></a><a href='#L143'>143</a>
-<a name='L144'></a><a href='#L144'>144</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L144'></a><a href='#L144'>144</a>
+<a name='L145'></a><a href='#L145'>145</a>
+<a name='L146'></a><a href='#L146'>146</a>
+<a name='L147'></a><a href='#L147'>147</a>
+<a name='L148'></a><a href='#L148'>148</a>
+<a name='L149'></a><a href='#L149'>149</a>
+<a name='L150'></a><a href='#L150'>150</a>
+<a name='L151'></a><a href='#L151'>151</a>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -220,19 +233,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -353,7 +379,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 &nbsp;
-function MenuItemReviewForm({
+function HelpRequestForm({
   initialContents,
   submitAction,
   buttonLabel = "Create",
@@ -366,14 +392,17 @@ function MenuItemReviewForm({
   } = useForm({ defaultValues: initialContents || {} });
   // Stryker restore all
 &nbsp;
+  const navigate = useNavigate();
+&nbsp;
+  const testIdPrefix = "HelpRequestForm";
+&nbsp;
+  // For explanation, see: https://stackoverflow.com/questions/3143070/javascript-regex-iso-datetime
+  // Note that even this complex regex may still need some tweaks
+&nbsp;
   // Stryker disable Regex
   const isodate_regex =
     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
   // Stryker restore Regex
-&nbsp;
-  const navigate = useNavigate();
-&nbsp;
-  const testIdPrefix = "MenuItemReviewForm";
 &nbsp;
   return (
     &lt;Form onSubmit={handleSubmit(submitAction)}&gt;
@@ -392,90 +421,100 @@ function MenuItemReviewForm({
       )}
 &nbsp;
       &lt;Form.Group className="mb-3"&gt;
-        &lt;Form.Label htmlFor="itemId"&gt;ItemId&lt;/Form.Label&gt;
+        &lt;Form.Label htmlFor="requesterEmail"&gt;Requester Email&lt;/Form.Label&gt;
         &lt;Form.Control
-          id="itemId"
-          type="int"
-          isInvalid={Boolean(errors.itemId)}
-          {...register("itemId", {
-            required: "ItemId is required.",
-          })}
-        /&gt;
-        &lt;Form.Control.Feedback type="invalid"&gt;
-          {errors.itemId?.message}
-        &lt;/Form.Control.Feedback&gt;
-      &lt;/Form.Group&gt;
-&nbsp;
-      &lt;Form.Group className="mb-3"&gt;
-        &lt;Form.Label htmlFor="reviewerEmail"&gt;ReviewerEmail&lt;/Form.Label&gt;
-        &lt;Form.Control
-          data-testid={testIdPrefix + "-reviewerEmail"}
-          id="reviewerEmail"
+          data-testid={testIdPrefix + "-requesterEmail"}
+          id="requesterEmail"
           type="text"
-          isInvalid={Boolean(errors.reviewerEmail)}
-          {...register("reviewerEmail", {
-            required: "ReviewerEmail is required.",
+          isInvalid={Boolean(errors.requesterEmail)}
+          {...register("requesterEmail", {
+            required: "Requester Email is required.",
             maxLength: {
-              value: 255,
+              value: 30,
               message: "Max length 255 characters",
             },
           })}
         /&gt;
         &lt;Form.Control.Feedback type="invalid"&gt;
-          {errors.reviewerEmail?.message}
+          {errors.requesterEmail?.message}
         &lt;/Form.Control.Feedback&gt;
       &lt;/Form.Group&gt;
 &nbsp;
       &lt;Form.Group className="mb-3"&gt;
-        &lt;Form.Label htmlFor="stars"&gt;Stars&lt;/Form.Label&gt;
+        &lt;Form.Label htmlFor="teamId"&gt;Team Id&lt;/Form.Label&gt;
         &lt;Form.Control
-          id="stars"
-          type="int"
-          isInvalid={Boolean(errors.stars)}
-          {...register("stars", {
-            required: "Stars is required.",
+          id="teamId"
+          type="text"
+          isInvalid={Boolean(errors.teamId)}
+          {...register("teamId", {
+            required: "Team Id is required.",
           })}
         /&gt;
         &lt;Form.Control.Feedback type="invalid"&gt;
-          {errors.stars?.message}
+          {errors.teamId?.message}
         &lt;/Form.Control.Feedback&gt;
       &lt;/Form.Group&gt;
 &nbsp;
       &lt;Form.Group className="mb-3"&gt;
-        &lt;Form.Label htmlFor="dateReviewed"&gt;
-          Date Reviewed (iso format)
+        &lt;Form.Label htmlFor="tableOrBreakoutRoom"&gt;
+          Table Or Breakout Room
         &lt;/Form.Label&gt;
         &lt;Form.Control
-          id="dateReviewed"
+          id="tableOrBreakoutRoom"
+          type="text"
+          isInvalid={Boolean(errors.tableOrBreakoutRoom)}
+          {...register("tableOrBreakoutRoom", {
+            required: "Table Or Breakout Room is required.",
+          })}
+        /&gt;
+        &lt;Form.Control.Feedback type="invalid"&gt;
+          {errors.tableOrBreakoutRoom?.message}
+        &lt;/Form.Control.Feedback&gt;
+      &lt;/Form.Group&gt;
+&nbsp;
+      &lt;Form.Group className="mb-3"&gt;
+        &lt;Form.Label htmlFor="requestTime"&gt;Request Time (iso format)&lt;/Form.Label&gt;
+        &lt;Form.Control
+          id="requestTime"
           type="datetime-local"
-          isInvalid={Boolean(errors.dateReviewed)}
-          {...register("dateReviewed", {
+          isInvalid={Boolean(errors.requestTime)}
+          {...register("requestTime", {
             required: true,
             pattern: isodate_regex,
           })}
         /&gt;
         &lt;Form.Control.Feedback type="invalid"&gt;
-          {errors.dateReviewed &amp;&amp; "DateReviewed is required. "}
+          {errors.requestTime &amp;&amp; "Request Time is required. "}
         &lt;/Form.Control.Feedback&gt;
       &lt;/Form.Group&gt;
 &nbsp;
       &lt;Form.Group className="mb-3"&gt;
-        &lt;Form.Label htmlFor="comments"&gt;Comments&lt;/Form.Label&gt;
+        &lt;Form.Label htmlFor="explanation"&gt;Explanation&lt;/Form.Label&gt;
         &lt;Form.Control
-          data-testid={testIdPrefix + "-comments"}
-          id="comments"
+          id="explanation"
           type="text"
-          isInvalid={Boolean(errors.comments)}
-          {...register("comments", {
-            required: "Comments is required.",
-            maxLength: {
-              value: 255,
-              message: "Max length 255 characters",
-            },
+          isInvalid={Boolean(errors.explanation)}
+          {...register("explanation", {
+            required: "Explanation is required.",
           })}
         /&gt;
         &lt;Form.Control.Feedback type="invalid"&gt;
-          {errors.comments?.message}
+          {errors.explanation?.message}
+        &lt;/Form.Control.Feedback&gt;
+      &lt;/Form.Group&gt;
+&nbsp;
+      &lt;Form.Group className="mb-3"&gt;
+        &lt;Form.Label htmlFor="solved"&gt;Solved&lt;/Form.Label&gt;
+        &lt;Form.Control
+          id="solved"
+          type="checkbox"
+          isInvalid={Boolean(errors.explanation)}
+          {...register("solved", {
+            required: "Solved is required.",
+          })}
+        /&gt;
+        &lt;Form.Control.Feedback type="invalid"&gt;
+          {errors.solved?.message}
         &lt;/Form.Control.Feedback&gt;
       &lt;/Form.Group&gt;
 &nbsp;
@@ -491,7 +530,7 @@ function MenuItemReviewForm({
   );
 }
 &nbsp;
-export default MenuItemReviewForm;
+export default HelpRequestForm;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
