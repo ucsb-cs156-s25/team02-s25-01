@@ -1,4 +1,4 @@
-# STARTER-team02
+## team02-s25-01
 
 Instructions: <https://ucsb-cs156.github.io/s25/lab/team02.html>
 
