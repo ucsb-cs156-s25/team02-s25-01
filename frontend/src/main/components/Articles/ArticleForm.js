@@ -7,17 +7,23 @@ function ArticleForm({
   submitAction,
   buttonLabel = "Create",
 }) {
+  const defaultValues = initialContents
+    ? {
+        ...initialContents,
+        dateAdded: initialContents.dateAdded.replace("Z", ""),
+      }
+    : {};
   // Stryker disable all
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({ defaultValues: initialContents || {} });
+  } = useForm({ defaultValues });
   // Stryker restore all
 
   const navigate = useNavigate();
 
-    // For explanation, see: https://stackoverflow.com/questions/3143070/javascript-regex-iso-datetime
+  // For explanation, see: https://stackoverflow.com/questions/3143070/javascript-regex-iso-datetime
   // Note that even this complex regex may still need some tweaks
 
   // Stryker disable Regex
@@ -69,7 +75,7 @@ function ArticleForm({
           data-testid={testIdPrefix + "-url"}
           id="url"
           type="text"
-          isInvalid={Boolean(errors.description)}
+          isInvalid={Boolean(errors.url)}
           {...register("url", {
             required: "Url is required.",
           })}
@@ -85,7 +91,7 @@ function ArticleForm({
           data-testid={testIdPrefix + "-url"}
           id="explanation"
           type="text"
-          isInvalid={Boolean(errors.description)}
+          isInvalid={Boolean(errors.explanation)}
           {...register("explanation", {
             required: "Explanation is required.",
           })}
@@ -101,7 +107,7 @@ function ArticleForm({
           data-testid={testIdPrefix + "-url"}
           id="email"
           type="text"
-          isInvalid={Boolean(errors.description)}
+          isInvalid={Boolean(errors.email)}
           {...register("email", {
             required: "Email is required.",
           })}
@@ -112,7 +118,7 @@ function ArticleForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="dateAdded">DateAdded</Form.Label>
+        <Form.Label htmlFor="dateAdded">Date added (in UTC)</Form.Label>
         <Form.Control
           data-testid={testIdPrefix + "-dateAdded"}
           id="dateAdded"
