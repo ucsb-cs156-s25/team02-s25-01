@@ -110,6 +110,7 @@ describe("UCSBOrganizationForm tests", () => {
     );
 
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-submit`)).toBeVisible();
     const submitButton = screen.getByText(/Create/);
     fireEvent.click(submitButton);
 
