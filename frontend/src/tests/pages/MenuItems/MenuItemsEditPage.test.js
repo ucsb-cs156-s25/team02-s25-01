@@ -88,19 +88,19 @@ describe("MenuItemEditPage tests", () => {
           id: 17,
           diningCommonsCode: 123,
           name: "Pizza",
-          description: "Oven",
+          station: "Oven",
         });
       axiosMock.onPut("/api/UCSBDiningCommonsMenuItem").reply(200, {
         id: 17,
-        diningCommonsCode: 123,
-        name: "Pizza",
-        description: "Oven",
+        diningCommonsCode: "098",
+        name: "Turkey",
+        station: "Lunch",
       });
     });
 
     const queryClient = new QueryClient();
 
-    test.only("Is populated with the data provided", async () => {
+    test("Is populated with the data provided", async () => {
       render(
         <QueryClientProvider client={queryClient}>
           <MemoryRouter>
@@ -112,9 +112,11 @@ describe("MenuItemEditPage tests", () => {
       await screen.findByTestId("MenuItemForm-id");
 
       const idField = screen.getByTestId("MenuItemForm-id");
-      const diningCommonsCodeField = screen.getByLabelText("Dining Commons Code");
+      const diningCommonsCodeField = screen.getByLabelText(
+        "Dining Commons Code",
+      );
       const nameField = screen.getByTestId("MenuItemForm-name");
-      const stationField = screen.getByTestId("MenuItemForm-Station");
+      const stationField = screen.getByLabelText("Station");
       const submitButton = screen.getByText("Update");
 
       expect(idField).toBeInTheDocument();
@@ -135,16 +137,16 @@ describe("MenuItemEditPage tests", () => {
         target: { value: "098" },
       });
       fireEvent.change(nameField, {
-        target: { value: "Turkey Sandwich" },
+        target: { value: "Turkey" },
       });
       fireEvent.change(stationField, {
         target: { value: "Lunch" },
       });
       fireEvent.click(submitButton);
 
-      await waitFor(() => expect(mockToast).toHaveBeenCalledWith());
+      await waitFor(() => expect(mockToast).toHaveBeenCalled());
       expect(mockToast).toHaveBeenCalledWith(
-        "Menu Item Updated - id: 17 name: Turkey Sandwich",
+        "Menu Item Updated - id: 17 name: Turkey",
       );
 
       expect(mockNavigate).toHaveBeenCalledWith({ to: "/menuItems" });
@@ -154,8 +156,8 @@ describe("MenuItemEditPage tests", () => {
       expect(axiosMock.history.put[0].data).toBe(
         JSON.stringify({
           diningCommonsCode: "098",
-          name: "Turkey Sandwich",
-          description: "Lunch",
+          name: "Turkey",
+          station: "Lunch",
         }),
       ); // posted object
     });
@@ -172,28 +174,28 @@ describe("MenuItemEditPage tests", () => {
       await screen.findByTestId("MenuItemForm-id");
 
       const idField = screen.getByTestId("MenuItemForm-id");
-      const diningCommonsCodeField = screen.getByTestId(
-        "MenuItemForm-diningCommonsCode",
+      const diningCommonsCodeField = screen.getByLabelText(
+        "Dining Commons Code",
       );
       const nameField = screen.getByTestId("MenuItemForm-name");
-      const stationField = screen.getByTestId("MenuItemForm-station");
-      const submitButton = screen.getByTestId("MenuItemForm-submit");
+      const stationField = screen.getByLabelText("Station");
+      const submitButton = screen.getByText("Update");
 
       expect(idField).toHaveValue("17");
       expect(diningCommonsCodeField).toHaveValue("123");
-      expect(nameField).toHaveValue("Cereal");
-      expect(stationField).toHaveValue("Breakfast");
+      expect(nameField).toHaveValue("Pizza");
+      expect(stationField).toHaveValue("Oven");
       expect(submitButton).toBeInTheDocument();
 
-      fireEvent.change(diningCommonsCodeField, { target: { value: "707" } });
-      fireEvent.change(nameField, { target: { value: "Steak" } });
-      fireEvent.change(stationField, { target: { value: "Din Din" } });
+      fireEvent.change(diningCommonsCodeField, { target: { value: "098" } });
+      fireEvent.change(nameField, { target: { value: "Turkey" } });
+      fireEvent.change(stationField, { target: { value: "Lunch" } });
 
       fireEvent.click(submitButton);
 
-      await waitFor(() => expect(mockToast).toHaveBeenCalledWith());
+      await waitFor(() => expect(mockToast).toHaveBeenCalled());
       expect(mockToast).toHaveBeenCalledWith(
-        "Restaurant Updated - id: 17 name: Steak",
+        "Menu Item Updated - id: 17 name: Turkey",
       );
       expect(mockNavigate).toHaveBeenCalledWith({ to: "/menuItems" });
     });
