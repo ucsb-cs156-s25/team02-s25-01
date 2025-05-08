@@ -5,7 +5,7 @@ const articleFixtures = {
     url: "apple.com",
     explanation: "apple",
     email: "apple@gmail.com",
-    dateAdded: "2025-05-02T03:39:16.131Z",
+    dateAdded: "2025-05-02T03:39:16Z",
   },
   threeArticles: [
     {
@@ -14,7 +14,7 @@ const articleFixtures = {
       url: "google.com",
       explanation: "google",
       email: "rankesterc@gmail.com",
-      dateAdded: "2025-05-01T03:39:16.131Z",
+      dateAdded: "2025-05-01T03:39:16Z",
     },
     {
       id: 3,
@@ -22,7 +22,7 @@ const articleFixtures = {
       url: "facebook.com",
       explanation: "facebook",
       email: "rankesterc@outlook.com",
-      dateAdded: "2025-04-02T03:39:16.131Z",
+      dateAdded: "2025-04-02T03:39:16Z",
     },
     {
       id: 4,
@@ -30,7 +30,7 @@ const articleFixtures = {
       url: "ucsb.math.edu",
       explanation: "ucsbmath",
       email: "math@gmail.com",
-      dateAdded: "2025-03-02T03:39:16.131Z",
+      dateAdded: "2025-03-02T03:39:16Z",
     },
   ],
 };
