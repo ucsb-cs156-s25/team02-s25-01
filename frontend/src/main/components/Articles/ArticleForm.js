@@ -7,14 +7,14 @@ function ArticleForm({
   submitAction,
   buttonLabel = "Create",
 }) {
-    // Stryker disable all
+  // Stryker disable all
   const defaultValues = initialContents
     ? {
         ...initialContents,
         dateAdded: initialContents.dateAdded.replace("Z", ""),
       }
     : {};
-  
+
   const {
     register,
     formState: { errors },
@@ -25,10 +25,10 @@ function ArticleForm({
   const navigate = useNavigate();
 
   // For explanation, see: https://stackoverflow.com/questions/3143070/javascript-regex-iso-datetime
-   // Note that even this complex regex may still need some tweaks
+  // Note that even this complex regex may still need some tweaks
 
   // Stryker disable Regex
-    // const isodate_regex = /^\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d(?:[:][0-5]\d)?$/i;
+  // const isodate_regex = /^\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d(?:[:][0-5]\d)?$/i;
 
   const isodate_regex =
     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
@@ -75,7 +75,7 @@ function ArticleForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="url">Url</Form.Label>
         <Form.Control
-        //   data-testid={testIdPrefix + "-url"}
+          //   data-testid={testIdPrefix + "-url"}
           id="url"
           type="text"
           isInvalid={Boolean(errors.url)}
@@ -91,7 +91,7 @@ function ArticleForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="explanation">Explanation</Form.Label>
         <Form.Control
-        //   data-testid={testIdPrefix + "-url"}
+          //   data-testid={testIdPrefix + "-url"}
           id="explanation"
           type="text"
           isInvalid={Boolean(errors.explanation)}
@@ -107,7 +107,7 @@ function ArticleForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="email">Email</Form.Label>
         <Form.Control
-        //   data-testid={testIdPrefix + "-url"}
+          //   data-testid={testIdPrefix + "-url"}
           id="email"
           type="text"
           isInvalid={Boolean(errors.email)}
@@ -123,7 +123,7 @@ function ArticleForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="dateAdded">Date added (in UTC)</Form.Label>
         <Form.Control
-        //   data-testid={testIdPrefix + "-dateAdded"}
+          //   data-testid={testIdPrefix + "-dateAdded"}
           id="dateAdded"
           type="datetime-local"
           isInvalid={Boolean(errors.dateAdded)}
@@ -138,8 +138,9 @@ function ArticleForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit" 
-    //   data-testid={testIdPrefix + "-submit"}
+      <Button
+        type="submit"
+        //   data-testid={testIdPrefix + "-submit"}
       >
         {buttonLabel}
       </Button>
