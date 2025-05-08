@@ -214,17 +214,13 @@
 <a name='L149'></a><a href='#L149'>149</a>
 <a name='L150'></a><a href='#L150'>150</a>
 <a name='L151'></a><a href='#L151'>151</a>
-<a name='L152'></a><a href='#L152'>152</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L152'></a><a href='#L152'>152</a>
+<a name='L153'></a><a href='#L153'>153</a>
+<a name='L154'></a><a href='#L154'>154</a>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -237,6 +233,17 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -244,12 +251,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -374,13 +386,14 @@ function ArticleForm({
   submitAction,
   buttonLabel = "Create",
 }) {
+    // Stryker disable all
   const defaultValues = initialContents
     ? {
         ...initialContents,
         dateAdded: initialContents.dateAdded.replace("Z", ""),
       }
     : {};
-  // Stryker disable all
+  
   const {
     register,
     formState: { errors },
@@ -391,9 +404,11 @@ function ArticleForm({
   const navigate = useNavigate();
 &nbsp;
   // For explanation, see: https://stackoverflow.com/questions/3143070/javascript-regex-iso-datetime
-  // Note that even this complex regex may still need some tweaks
+   // Note that even this complex regex may still need some tweaks
 &nbsp;
   // Stryker disable Regex
+    // const isodate_regex = /^\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d(?:[:][0-5]\d)?$/i;
+&nbsp;
   const isodate_regex =
     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
   // Stryker restore Regex
@@ -439,7 +454,7 @@ function ArticleForm({
       &lt;Form.Group className="mb-3"&gt;
         &lt;Form.Label htmlFor="url"&gt;Url&lt;/Form.Label&gt;
         &lt;Form.Control
-          data-testid={testIdPrefix + "-url"}
+        //   data-testid={testIdPrefix + "-url"}
           id="url"
           type="text"
           isInvalid={Boolean(errors.url)}
@@ -455,7 +470,7 @@ function ArticleForm({
       &lt;Form.Group className="mb-3"&gt;
         &lt;Form.Label htmlFor="explanation"&gt;Explanation&lt;/Form.Label&gt;
         &lt;Form.Control
-          data-testid={testIdPrefix + "-url"}
+        //   data-testid={testIdPrefix + "-url"}
           id="explanation"
           type="text"
           isInvalid={Boolean(errors.explanation)}
@@ -471,7 +486,7 @@ function ArticleForm({
       &lt;Form.Group className="mb-3"&gt;
         &lt;Form.Label htmlFor="email"&gt;Email&lt;/Form.Label&gt;
         &lt;Form.Control
-          data-testid={testIdPrefix + "-url"}
+        //   data-testid={testIdPrefix + "-url"}
           id="email"
           type="text"
           isInvalid={Boolean(errors.email)}
@@ -487,7 +502,7 @@ function ArticleForm({
       &lt;Form.Group className="mb-3"&gt;
         &lt;Form.Label htmlFor="dateAdded"&gt;Date added (in UTC)&lt;/Form.Label&gt;
         &lt;Form.Control
-          data-testid={testIdPrefix + "-dateAdded"}
+        //   data-testid={testIdPrefix + "-dateAdded"}
           id="dateAdded"
           type="datetime-local"
           isInvalid={Boolean(errors.dateAdded)}
@@ -495,13 +510,16 @@ function ArticleForm({
             required: "DateAdded is required.",
             pattern: isodate_regex,
           })}
+          step="1"
         /&gt;
         &lt;Form.Control.Feedback type="invalid"&gt;
           {errors.dateAdded?.message}
         &lt;/Form.Control.Feedback&gt;
       &lt;/Form.Group&gt;
 &nbsp;
-      &lt;Button type="submit" data-testid={testIdPrefix + "-submit"}&gt;
+      &lt;Button type="submit" 
+    //   data-testid={testIdPrefix + "-submit"}
+      &gt;
         {buttonLabel}
       &lt;/Button&gt;
       &lt;Button
@@ -523,7 +541,7 @@ export default ArticleForm;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-08T22:21:34.117Z
+                at 2025-05-08T23:21:40.485Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
