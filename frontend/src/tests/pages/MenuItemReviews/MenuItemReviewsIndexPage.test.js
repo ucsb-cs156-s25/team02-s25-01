@@ -95,15 +95,15 @@ describe("MenuItemReviewIndexPage tests", () => {
       "4",
     );
 
-    const createMenuItemReviewButton = screen.queryByText("Create MenuItemReview");
+    const createMenuItemReviewButton = screen.queryByText(
+      "Create MenuItemReview",
+    );
     expect(createMenuItemReviewButton).not.toBeInTheDocument();
 
     const itemId = screen.getByText("6");
     expect(itemId).toBeInTheDocument();
 
-    const reviewerEmail = screen.getByText(
-      "becky_gaucho@ucsb.edu",
-    );
+    const reviewerEmail = screen.getByText("becky_gaucho@ucsb.edu");
     expect(reviewerEmail).toBeInTheDocument();
 
     const stars = screen.getByText("5");
