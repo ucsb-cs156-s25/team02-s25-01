@@ -128,7 +128,7 @@ function HelpRequestForm({
 
       <Form.Group className="mb-3">
         <Form.Label htmlFor="solved">Solved</Form.Label>
-        <Form.Control
+        <Form.Check
           id="solved"
           type="checkbox"
           isInvalid={Boolean(errors.explanation)}
