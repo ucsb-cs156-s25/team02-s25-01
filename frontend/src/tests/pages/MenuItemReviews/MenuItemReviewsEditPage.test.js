@@ -63,7 +63,9 @@ describe("MenuItemReviewEditPage tests", () => {
         </QueryClientProvider>,
       );
       await screen.findByText("Edit MenuItemReview");
-      expect(screen.queryByTestId("MenuItemReview-itemId")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("MenuItemReview-itemId"),
+      ).not.toBeInTheDocument();
       restoreConsole();
     });
   });
@@ -80,14 +82,16 @@ describe("MenuItemReviewEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/menuitemreview", { params: { id: 17 } }).reply(200, {
-        id: 17,
-        itemId: 4,
-        reviewerEmail: "chris_gaucho@ucsb.edu",
-        stars: 5,
-        dateReviewed: "2025-01-20T14:20:00",
-        comments: "The Pizza was great!",
-      });
+      axiosMock
+        .onGet("/api/menuitemreview", { params: { id: 17 } })
+        .reply(200, {
+          id: 17,
+          itemId: 4,
+          reviewerEmail: "chris_gaucho@ucsb.edu",
+          stars: 5,
+          dateReviewed: "2025-01-20T14:20:00",
+          comments: "The Pizza was great!",
+        });
       axiosMock.onPut("/api/menuitemreview").reply(200, {
         id: "17",
         itemId: 10,
@@ -115,7 +119,9 @@ describe("MenuItemReviewEditPage tests", () => {
       const itemIdField = screen.getByLabelText("ItemId");
       const reviewerEmailField = screen.getByLabelText("ReviewerEmail");
       const starsField = screen.getByLabelText("Stars");
-      const dateReviewedField = screen.getByLabelText("Date Reviewed (iso format)");
+      const dateReviewedField = screen.getByLabelText(
+        "Date Reviewed (iso format)",
+      );
       const commentsField = screen.getByLabelText("Comments");
       const submitButton = screen.getByText("Update");
 
@@ -186,7 +192,9 @@ describe("MenuItemReviewEditPage tests", () => {
       const itemIdField = screen.getByLabelText("ItemId");
       const reviewerEmailField = screen.getByLabelText("ReviewerEmail");
       const starsField = screen.getByLabelText("Stars");
-      const dateReviewedField = screen.getByLabelText("Date Reviewed (iso format)");
+      const dateReviewedField = screen.getByLabelText(
+        "Date Reviewed (iso format)",
+      );
       const commentsField = screen.getByLabelText("Comments");
       const submitButton = screen.getByText("Update");
 
