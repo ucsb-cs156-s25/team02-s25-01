@@ -24,49 +24,52 @@ import edu.ucsb.cs156.example.repositories.HelpRequestRepository;
 public class HelpRequestWebIT extends WebTestCase {
 
     @Autowired
-    HelpRequestRepository helpRequestRepository;
-    
+        HelpRequestRepository helpRequestRepository;
+
     @Test
-    public void admin_user_can_create_edit_delete_helprequest() throws Exception {
+    public void admin_user_can_create_edit_delete_helpRequest() throws Exception {
 
         LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
+        String email1 = "hjin133@ucsb.edu";
+
         HelpRequest helprequest = HelpRequest.builder()
-            .requesterEmail("hjin133@ucsb.edu")
+            .requesterEmail(email1)
             .teamId("01")
             .tableOrBreakoutRoom("table1")
             .requestTime(ldt1)
             .explanation("Can-i-get-a-help?")
             .solved(true)
             .build();
+                                
         helpRequestRepository.save(helprequest);
 
         setupUser(true);
 
         page.getByText("Help Request").click();
 
-        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-requesterEmail")).hasText("hjin133@ucsb.edu");
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-requesterEmail")).hasText(email1);
 
         page.getByTestId("HelpRequestTable-cell-row-0-col-Delete-button").click();
 
-        assertThat(page.getByTestId("HelRequestTable-cell-row-0-col-requesterEmail")).not().isVisible();
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-requesterEmail")).not().isVisible();
     }
-
     @Test
     public void regular_user_cannot_create_helpRequest() throws Exception {
         setupUser(false);
-
+    
         page.getByText("Help Request").click();
-
+    
         assertThat(page.getByText("Create HelpRequest")).not().isVisible();
     }
 
     @Test
-    public void admin_user_can_see_create_helpRequest_botton() throws Exception {
+    public void admin_user_can_see_create_helpRequest_button() throws Exception {
         setupUser(true);
-
+    
         page.getByText("Help Request").click();
-
+    
         assertThat(page.getByText("Create HelpRequest")).isVisible();
     }
+
 }
