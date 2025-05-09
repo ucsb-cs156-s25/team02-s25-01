@@ -49,17 +49,17 @@ export default function ArticleTable({
       accessor: "url",
     },
     {
-        Header: "Explanation",
-        accessor: "explanation",
-      },
-      {
-        Header: "Email",
-        accessor: "email",
-      },
-      {
-        Header: "DateAdded",
-        accessor: "dateAdded",
-      },
+      Header: "Explanation",
+      accessor: "explanation",
+    },
+    {
+      Header: "Email",
+      accessor: "email",
+    },
+    {
+      Header: "DateAdded",
+      accessor: "dateAdded",
+    },
   ];
 
   if (hasRole(currentUser, "ROLE_ADMIN")) {
@@ -69,7 +69,5 @@ export default function ArticleTable({
     );
   }
 
-  return (
-    <OurTable data={articles} columns={columns} testid={testIdPrefix} />
-  );
+  return <OurTable data={articles} columns={columns} testid={testIdPrefix} />;
 }
