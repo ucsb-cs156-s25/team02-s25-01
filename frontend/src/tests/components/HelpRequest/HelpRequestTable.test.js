@@ -17,8 +17,24 @@ jest.mock("react-router-dom", () => ({
 describe("HelpRequestTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["id", "Requester Email", "Team Id", "Table Or Breakout Room", "Request Time", "Explanation", "Solved"];
-  const expectedFields = ["id", "requesterEmail", "teamId", "tableOrBreakoutRoom", "requestTime", "explanation", "solved"];
+  const expectedHeaders = [
+    "id",
+    "Requester Email",
+    "Team Id",
+    "Table Or Breakout Room",
+    "Request Time",
+    "Explanation",
+    "Solved",
+  ];
+  const expectedFields = [
+    "id",
+    "requesterEmail",
+    "teamId",
+    "tableOrBreakoutRoom",
+    "requestTime",
+    "explanation",
+    "solved",
+  ];
   const testId = "HelpRequestTable";
 
   test("renders empty table correctly", () => {
@@ -135,7 +151,7 @@ describe("HelpRequestTable tests", () => {
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
     ).toHaveTextContent("hjin133@ucsb.edu");
-  
+
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
       "3",
     );
