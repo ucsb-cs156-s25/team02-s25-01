@@ -43,19 +43,19 @@ describe("UCSBOrganizationTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expect(
-      await screen.findByTestId(`${testId}-cell-row-0-col-inactive`)
+      await screen.findByTestId(`${testId}-cell-row-0-col-inactive`),
     ).toHaveTextContent("false");
 
     expect(
-      screen.getByTestId(`${testId}-cell-row-1-col-inactive`)
+      screen.getByTestId(`${testId}-cell-row-1-col-inactive`),
     ).toHaveTextContent("true");
 
     expect(
-      screen.getByTestId(`${testId}-cell-row-2-col-inactive`)
+      screen.getByTestId(`${testId}-cell-row-2-col-inactive`),
     ).toHaveTextContent("false");
   });
 
@@ -70,18 +70,18 @@ describe("UCSBOrganizationTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     await waitFor(() => {
       expect(
-        screen.queryByTestId(`${testId}-cell-row-0-col-Edit-button`)
+        screen.queryByTestId(`${testId}-cell-row-0-col-Edit-button`),
       ).not.toBeInTheDocument();
     });
 
     await waitFor(() => {
       expect(
-        screen.queryByTestId(`${testId}-cell-row-0-col-Delete-button`)
+        screen.queryByTestId(`${testId}-cell-row-0-col-Delete-button`),
       ).not.toBeInTheDocument();
     });
   });
@@ -94,7 +94,7 @@ describe("UCSBOrganizationTable tests", () => {
         <MemoryRouter>
           <UCSBOrganizationTable organizations={[]} currentUser={currentUser} />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expectedHeaders.forEach((headerText) => {
@@ -103,7 +103,7 @@ describe("UCSBOrganizationTable tests", () => {
 
     expectedFields.forEach((field) => {
       const fieldElement = screen.queryByTestId(
-        `${testId}-cell-row-0-col-${field}`
+        `${testId}-cell-row-0-col-${field}`,
       );
       expect(fieldElement).not.toBeInTheDocument();
     });
@@ -120,7 +120,7 @@ describe("UCSBOrganizationTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expectedHeaders.forEach((headerText) => {
@@ -128,25 +128,47 @@ describe("UCSBOrganizationTable tests", () => {
     });
 
     // orgCode checks
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("ZPR");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("SKI");
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-orgCode`)).toHaveTextContent("SRB");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-orgCode`),
+    ).toHaveTextContent("ZPR");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-orgCode`),
+    ).toHaveTextContent("SKI");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-2-col-orgCode`),
+    ).toHaveTextContent("SRB");
 
-    // orgTranslationShort checks 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("Zeta Phi Rho");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`)).toHaveTextContent("Skiing Club");
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-orgTranslationShort`)).toHaveTextContent("Student Resource");
+    // orgTranslationShort checks
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`),
+    ).toHaveTextContent("Zeta Phi Rho");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`),
+    ).toHaveTextContent("Skiing Club");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-2-col-orgTranslationShort`),
+    ).toHaveTextContent("Student Resource");
 
     // orgTranslation checks
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslation`)).toHaveTextContent("Zeta Phi Rho");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgTranslation`)).toHaveTextContent("Skiing Club at UCSB");
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-orgTranslation`)).toHaveTextContent("Office of Student Resource");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-orgTranslation`),
+    ).toHaveTextContent("Zeta Phi Rho");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-orgTranslation`),
+    ).toHaveTextContent("Skiing Club at UCSB");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-2-col-orgTranslation`),
+    ).toHaveTextContent("Office of Student Resource");
 
-    const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
+    const editButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Edit-button`,
+    );
     expect(editButton).toBeInTheDocument();
     expect(editButton).toHaveClass("btn-primary");
 
-    const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    const deleteButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Delete-button`,
+    );
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
   });
@@ -162,18 +184,16 @@ describe("UCSBOrganizationTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     const editButton = await screen.findByTestId(
-      `${testId}-cell-row-0-col-Edit-button`
+      `${testId}-cell-row-0-col-Edit-button`,
     );
     fireEvent.click(editButton);
 
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith(
-        "/UCSBOrganization/edit/ZPR"
-      )
+      expect(mockedNavigate).toHaveBeenCalledWith("/UCSBOrganization/edit/ZPR"),
     );
   });
 
@@ -194,11 +214,11 @@ describe("UCSBOrganizationTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     const deleteButton = await screen.findByTestId(
-      `${testId}-cell-row-0-col-Delete-button`
+      `${testId}-cell-row-0-col-Delete-button`,
     );
     fireEvent.click(deleteButton);
 
