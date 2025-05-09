@@ -19,7 +19,7 @@ const ucsbOrganizationFixtures = {
       orgCode: "SKI",
       orgTranslationShort: "Skiing Club",
       orgTranslation: "Skiing Club at UCSB",
-      inactive: false,
+      inactive: true,
     },
     {
       orgCode: "SRB",
