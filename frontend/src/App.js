@@ -186,15 +186,6 @@ function App() {
           <>
             <Route
               exact
-              path="/placeholder"
-              element={<PlaceholderIndexPage />}
-            />
-          </>
-        )}
-        {hasRole(currentUser, "ROLE_USER") && (
-          <>
-            <Route
-              exact
               path="/ucsborganization"
               element={<UCSBOrganizationIndexPage />}
             />
