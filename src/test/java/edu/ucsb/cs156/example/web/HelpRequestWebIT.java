@@ -37,23 +37,20 @@ public class HelpRequestWebIT extends WebTestCase {
 
         page.getByText("Help Request").click();
 
-        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-requesterEmail"))
-                .hasText("hjin133@ucsb.edu");
         assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-requesterEmail")).hasText("hjin133@ucsb.edu");
 
         page.getByTestId("HelpRequestTable-cell-row-0-col-Delete-button").click();
 
-        assertThat(page.getByTestId("HelRequestTable-cell-row-0-col-name")).not().isVisible();
         assertThat(page.getByTestId("HelRequestTable-cell-row-0-col-requesterEmail")).not().isVisible();
     }
 
     @Test
     public void regular_user_cannot_create_helpRequest() throws Exception {
         setupUser(false);
+        
         page.getByText("Help Request").click();
 
         assertThat(page.getByText("Create HelpRequest")).not().isVisible();
-        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-name")).not().isVisible();
     }
 
     @Test
