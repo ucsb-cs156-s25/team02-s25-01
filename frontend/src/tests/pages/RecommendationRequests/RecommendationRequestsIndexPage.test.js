@@ -1,9 +1,9 @@
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
-import HelpRequestIndexPage from "main/pages/HelpRequest/HelpRequestIndexPage";
+import RecommendationRequestIndexPage from "main/pages/RecommendationRequests/RecommendationRequestsIndexPage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import mockConsole from "jest-mock-console";
-import { helpRequestFixtures } from "fixtures/helpRequestFixtures";
+import { recommendationRequestFixtures } from "fixtures/recommendationRequestFixtures";
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
@@ -20,11 +20,10 @@ jest.mock("react-toastify", () => {
   };
 });
 
-describe("HelpRequestIndexPage tests", () => {
+describe("RecommendationRequestsIndexPage tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
 
-  const testId = "HelpRequestTable";
-
+  const testId = "RecommendationRequestTable";
 
   const setupUserOnly = () => {
     axiosMock.reset();
@@ -52,34 +51,36 @@ describe("HelpRequestIndexPage tests", () => {
 
   test("Renders with Create Button for admin user", async () => {
     setupAdminUser();
-    axiosMock.onGet("/api/helprequest/all").reply(200, []);
+    axiosMock.onGet("/api/recommendationrequest/all").reply(200, []);
 
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestIndexPage />
+          <RecommendationRequestIndexPage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
 
     await waitFor(() => {
-      expect(screen.getByText(/Create HelpRequest/)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Create Recommendation Request/),
+      ).toBeInTheDocument();
     });
-    const button = screen.getByText(/Create HelpRequest/);
-    expect(button).toHaveAttribute("href", "/helprequest/create");
+    const button = screen.getByText(/Create Recommendation Request/);
+    expect(button).toHaveAttribute("href", "/recommendationrequest/create");
     expect(button).toHaveAttribute("style", "float: right;");
   });
 
-  test("renders three helprequest correctly for regular user", async () => {
+  test("renders three recommendation requests correctly for regular user", async () => {
     setupUserOnly();
     axiosMock
-      .onGet("/api/helprequest/all")
-      .reply(200, helpRequestFixtures.threeHelpRequests);
+      .onGet("/api/recommendationrequest/all")
+      .reply(200, recommendationRequestFixtures.threeRecommendationRequest);
 
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestIndexPage />
+          <RecommendationRequestIndexPage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
@@ -87,55 +88,59 @@ describe("HelpRequestIndexPage tests", () => {
     await waitFor(() => {
       expect(
         screen.getByTestId(`${testId}-cell-row-0-col-id`),
-      ).toHaveTextContent("2");
+      ).toHaveTextContent("3");
     });
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
-      "3",
-    );
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent(
       "4",
     );
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent(
+      "5",
+    );
 
-    const createButton = screen.queryByText("Create HelpRequest");
+    const createButton = screen.queryByText("Create Recommendation Request");
     expect(createButton).not.toBeInTheDocument();
 
-    const teamId = screen.getByText("01");
-    expect(teamId).toBeInTheDocument();
+    const requesterEmail = screen.getByText("studentName@ucsb.edu");
+    expect(requesterEmail).toBeInTheDocument();
 
-    const tableOrBreakoutRoom = screen.getByText("table1");
-    expect(tableOrBreakoutRoom).toBeInTheDocument();
+    const professorEmail = screen.getByText("professorName@ucsb.edu");
+    expect(professorEmail).toBeInTheDocument();
 
-    const requestTime = screen.getByText("2025-05-01T17:22:00");
-    expect(requestTime).toBeInTheDocument();
-
-    const explanation = screen.getByText("I got an error message");
+    const explanation = screen.getByText(
+      "I need a letter of recommendation...",
+    );
     expect(explanation).toBeInTheDocument();
 
-    const solvedCell = screen.getByTestId(
-      "HelpRequestTable-cell-row-0-col-solved",
-    );
-    expect(solvedCell).toBeInTheDocument();
+    const dateRequested = screen.getByText("2025-01-01T00:00:00");
+    expect(dateRequested).toBeInTheDocument();
+
+    const dateNeeded = screen.getByText("2025-05-01T00:00:00");
+    expect(dateNeeded).toBeInTheDocument();
 
     // for non-admin users, details button is visible, but the edit and delete buttons should not be visible
     expect(
-      screen.queryByTestId("HelpRequestTable-cell-row-0-col-Delete-button"),
+      screen.queryByTestId(
+        "RecommendationRequestTable-cell-row-0-col-Delete-button",
+      ),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByTestId("HelpRequesTable-cell-row-0-col-Edit-button"),
+      screen.queryByTestId(
+        "RecommendationRequestTable-cell-row-0-col-Edit-button",
+      ),
     ).not.toBeInTheDocument();
   });
 
   test("renders empty table when backend unavailable, user only", async () => {
     setupUserOnly();
 
-    axiosMock.onGet("/api/helprequest/all").timeout();
+    axiosMock.onGet("/api/recommendationrequest/all").timeout();
 
     const restoreConsole = mockConsole();
 
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestIndexPage />
+          <RecommendationRequestIndexPage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
@@ -146,7 +151,7 @@ describe("HelpRequestIndexPage tests", () => {
 
     const errorMessage = console.error.mock.calls[0][0];
     expect(errorMessage).toMatch(
-      "Error communicating with backend via GET on /api/helprequest/all",
+      "Error communicating with backend via GET on /api/recommendationrequest/all",
     );
     restoreConsole();
   });
@@ -155,16 +160,16 @@ describe("HelpRequestIndexPage tests", () => {
     setupAdminUser();
 
     axiosMock
-      .onGet("/api/helprequest/all")
-      .reply(200, helpRequestFixtures.threeHelpRequests);
+      .onGet("/api/recommendationrequest/all")
+      .reply(200, recommendationRequestFixtures.threeRecommendationRequest);
     axiosMock
-      .onDelete("/api/helprequest")
-      .reply(200, "HelpRequest with id 2 was deleted");
+      .onDelete("/api/recommendationrequest")
+      .reply(200, "Recommendation Request with id 3 was deleted");
 
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestIndexPage />
+          <RecommendationRequestIndexPage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
@@ -176,7 +181,7 @@ describe("HelpRequestIndexPage tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
-      "2",
+      "3",
     );
 
     const deleteButton = screen.getByTestId(
@@ -188,15 +193,14 @@ describe("HelpRequestIndexPage tests", () => {
 
     await waitFor(() => {
       expect(mockToast).toHaveBeenCalledWith(
-        "HelpRequest with id 2 was deleted",
+        "Recommendation Request with id 3 was deleted",
       );
     });
 
     await waitFor(() => {
       expect(axiosMock.history.delete.length).toBe(1);
     });
-    expect(axiosMock.history.delete[0].url).toBe("/api/helprequest");
-    expect(axiosMock.history.delete[0].url).toBe("/api/helprequest");
-    expect(axiosMock.history.delete[0].params).toEqual({ id: 2 });
+    expect(axiosMock.history.delete[0].url).toBe("/api/recommendationrequest");
+    expect(axiosMock.history.delete[0].params).toEqual({ id: 3 });
   });
 });
