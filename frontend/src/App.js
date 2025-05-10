@@ -95,6 +95,28 @@ function App() {
               element={<PlaceholderCreatePage />}
             />
           </>
+          {hasRole(currentUser, "ROLE_USER") && (
+          <>
+            <Route
+              exact
+              path="/placeholder"
+              element={<PlaceholderIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_ADMIN") && (
+          <>
+            <Route
+              exact
+              path="/menuItem/edit/:id"
+              element={<MenuItemEditPage />}
+            />
+            <Route
+              exact
+              path="/menuItem/create"
+              element={<MenuItemCreatePage />}
+            />
+          </>
         )}
       </Routes>
     </BrowserRouter>
