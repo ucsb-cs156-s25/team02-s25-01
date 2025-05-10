@@ -37,14 +37,11 @@ public class UCSBDiningCommonsMenuItemWebIT extends WebTestCase {
         ucsbDiningCommonsMenuItemRepository.save(menuItem1);
 
         setupUser(true);
-        
+    
         page.getByText("Menu Items").click();
-
         assertThat(page.getByTestId("MenuItemTable-cell-row-0-col-name"))
                 .hasText("chips");
-
         page.getByTestId("MenuItemTable-cell-row-0-col-Delete").click();
-       
         assertThat(page.getByTestId("MenuItemTable-cell-row-0-col-name")).isVisible();
     }
 
