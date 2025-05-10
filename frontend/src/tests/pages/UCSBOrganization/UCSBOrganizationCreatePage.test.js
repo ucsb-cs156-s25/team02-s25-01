@@ -125,7 +125,7 @@ describe("OrganizationCreatePage tests", () => {
     expect(mockToast).toBeCalledWith(
       "New organization Created - orgCode: ZPR orgTranslationShort: Zeta Phi Rho orgTranslation: Zeta Phi Rho inactive: true",
     );
-    expect(mockNavigate).toBeCalledWith({ to: "/ucsborganizations" });
+    expect(mockNavigate).toBeCalledWith({ to: "/ucsborganization" });
   });
 
   test("on submit, makes request to backend, and redirects to /ucsborganizations where inactive = false", async () => {
@@ -191,6 +191,6 @@ describe("OrganizationCreatePage tests", () => {
     expect(mockToast).toBeCalledWith(
       "New organization Created - orgCode: ZPR orgTranslationShort: Zeta Phi Rho orgTranslation: Zeta Phi Rho inactive: false",
     );
-    expect(mockNavigate).toBeCalledWith({ to: "/ucsborganizations" });
+    expect(mockNavigate).toBeCalledWith({ to: "/ucsborganization" });
   });
 });

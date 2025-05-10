@@ -65,7 +65,7 @@ describe("UCSBOrganizationIndexPage tests", () => {
       expect(screen.getByText(/Create Organization/)).toBeInTheDocument();
     });
     const button = screen.getByText(/Create Organization/);
-    expect(button).toHaveAttribute("href", "/ucsborganizations/create");
+    expect(button).toHaveAttribute("href", "/ucsborganization/create");
     expect(button).toHaveAttribute("style", "float: right;");
   });
 
