@@ -17,7 +17,7 @@ export default function MenuItemTable({
   const navigate = useNavigate();
 
   const editCallback = (cell) => {
-    navigate(`/menuItem/edit/${cell.row.values.id}`); // DOUBLE CHECK THIS AND REPLACE WITH UCSBDiningCommonsMenuItem IF NOT WORKING
+    navigate(`/menuItems/edit/${cell.row.values.id}`);
   };
 
   // Stryker disable all : hard to test for query caching
