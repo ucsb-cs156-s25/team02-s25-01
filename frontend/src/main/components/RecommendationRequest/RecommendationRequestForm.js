@@ -2,7 +2,7 @@ import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-function HelpRequestForm({
+function RecommendationRequestForm({
   initialContents,
   submitAction,
   buttonLabel = "Create",
@@ -17,10 +17,7 @@ function HelpRequestForm({
 
   const navigate = useNavigate();
 
-  const testIdPrefix = "HelpRequestForm";
-
-  // For explanation, see: https://stackoverflow.com/questions/3143070/javascript-regex-iso-datetime
-  // Note that even this complex regex may still need some tweaks
+  const testIdPrefix = "RecommendationRequestForm";
 
   // Stryker disable Regex
   const isodate_regex =
@@ -46,16 +43,11 @@ function HelpRequestForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="requesterEmail">Requester Email</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-requesterEmail"}
           id="requesterEmail"
           type="text"
           isInvalid={Boolean(errors.requesterEmail)}
           {...register("requesterEmail", {
             required: "Requester Email is required.",
-            maxLength: {
-              value: 30,
-              message: "Max length 255 characters",
-            },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -64,61 +56,33 @@ function HelpRequestForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="teamId">Team Id</Form.Label>
+        <Form.Label htmlFor="professorEmail">Professor Email</Form.Label>
         <Form.Control
-          id="teamId"
+          id="professorEmail"
           type="text"
-          isInvalid={Boolean(errors.teamId)}
-          {...register("teamId", {
-            required: "Team Id is required.",
+          isInvalid={Boolean(errors.professorEmail)}
+          {...register("professorEmail", {
+            required: "Professor Email is required.",
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.teamId?.message}
-        </Form.Control.Feedback>
-      </Form.Group>
-
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="tableOrBreakoutRoom">
-          Table Or Breakout Room
-        </Form.Label>
-        <Form.Control
-          id="tableOrBreakoutRoom"
-          type="text"
-          isInvalid={Boolean(errors.tableOrBreakoutRoom)}
-          {...register("tableOrBreakoutRoom", {
-            required: "Table Or Breakout Room is required.",
-          })}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.tableOrBreakoutRoom?.message}
-        </Form.Control.Feedback>
-      </Form.Group>
-
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="requestTime">Request Time (iso format)</Form.Label>
-        <Form.Control
-          id="requestTime"
-          type="datetime-local"
-          isInvalid={Boolean(errors.requestTime)}
-          {...register("requestTime", {
-            required: true,
-            pattern: isodate_regex,
-          })}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.requestTime && "Request Time is required. "}
+          {errors.professorEmail?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group className="mb-3">
         <Form.Label htmlFor="explanation">Explanation</Form.Label>
         <Form.Control
+          data-testid={testIdPrefix + "-explanation"}
           id="explanation"
           type="text"
-          isInvalid={Boolean(errors.explanation)}
+          isInvalid={Boolean(errors.professorEmail)}
           {...register("explanation", {
             required: "Explanation is required.",
+            maxLength: {
+              value: 255,
+              message: "Max length 255 characters",
+            },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -127,18 +91,47 @@ function HelpRequestForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="solved">Solved</Form.Label>
-        <Form.Check
-          id="solved"
-          type="checkbox"
-          isInvalid={Boolean(errors.explanation)}
-          {...register("solved", {
-            required: "Solved is required.",
+        <Form.Label htmlFor="dateRequested">
+          Date Requested (iso format)
+        </Form.Label>
+        <Form.Control
+          id="dateRequested"
+          type="datetime-local"
+          isInvalid={Boolean(errors.dateRequested)}
+          {...register("dateRequested", {
+            required: true,
+            pattern: isodate_regex,
           })}
         />
         <Form.Control.Feedback type="invalid">
-          {errors.solved?.message}
+          {errors.dateRequested && "Date Requested is required. "}
         </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="dateNeeded">Date Needed (iso format)</Form.Label>
+        <Form.Control
+          id="dateNeeded"
+          type="datetime-local"
+          isInvalid={Boolean(errors.dateNeeded)}
+          {...register("dateNeeded", {
+            required: true,
+            pattern: isodate_regex,
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.dateNeeded && "Date Needed is required. "}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="done">Done</Form.Label>
+        <Form.Check
+          id="done"
+          type="checkbox"
+          isInvalid={Boolean(errors.done)}
+          {...register("done", {})}
+        />
       </Form.Group>
 
       <Button type="submit">{buttonLabel}</Button>
@@ -153,4 +146,4 @@ function HelpRequestForm({
   );
 }
 
-export default HelpRequestForm;
+export default RecommendationRequestForm;
