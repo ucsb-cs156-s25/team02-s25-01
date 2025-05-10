@@ -41,13 +41,13 @@ public class HelpRequestWebIT extends WebTestCase {
 
         page.getByTestId("HelpRequestTable-cell-row-0-col-Delete-button").click();
 
-        assertThat(page.getByTestId("HelRequestTable-cell-row-0-col-requesterEmail")).not().isVisible();
+        assertThat(page.getByTestId("HelpRequestTable-cell-row-0-col-requesterEmail")).not().isVisible();
     }
 
     @Test
     public void regular_user_cannot_create_helpRequest() throws Exception {
         setupUser(false);
-        
+
         page.getByText("Help Request").click();
 
         assertThat(page.getByText("Create HelpRequest")).not().isVisible();
