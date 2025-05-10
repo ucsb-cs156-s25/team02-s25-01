@@ -15,9 +15,19 @@ import RecommendationRequestsIndexPage from "main/pages/RecommendationRequests/R
 import RecommendationRequestsCreatePage from "main/pages/RecommendationRequests/RecommendationRequestsCreatePage";
 import RecommendationRequestsEditPage from "main/pages/RecommendationRequests/RecommendationRequestsEditPage";
 
+
+import MenuItemReviewsIndexPage from "main/pages/MenuItemReviews/MenuItemReviewsIndexPage";
+import MenuItemReviewsCreatePage from "main/pages/MenuItemReviews/MenuItemReviewsCreatePage";
+import MenuItemReviewsEditPage from "main/pages/MenuItemReviews/MenuItemReviewsEditPage";
+
+
 import PlaceholderIndexPage from "main/pages/Placeholder/PlaceholderIndexPage";
 import PlaceholderCreatePage from "main/pages/Placeholder/PlaceholderCreatePage";
 import PlaceholderEditPage from "main/pages/Placeholder/PlaceholderEditPage";
+
+import MenuItemIndexPage from "main/pages/MenuItems/MenuItemIndexPage";
+import MenuItemCreatePage from "main/pages/MenuItems/MenuItemCreatePage";
+import MenuItemEditPage from "main/pages/MenuItems/MenuItemEditPage";
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
@@ -104,6 +114,29 @@ function App() {
           <>
             <Route
               exact
+              path="/menuItemReviews"
+              element={<MenuItemReviewsIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_ADMIN") && (
+          <>
+            <Route
+              exact
+              path="/menuItemReviews/edit/:id"
+              element={<MenuItemReviewsEditPage />}
+            />
+            <Route
+              exact
+              path="/menuItemReviews/create"
+              element={<MenuItemReviewsCreatePage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_USER") && (
+          <>
+            <Route
+              exact
               path="/placeholder"
               element={<PlaceholderIndexPage />}
             />
@@ -120,6 +153,25 @@ function App() {
               exact
               path="/placeholder/create"
               element={<PlaceholderCreatePage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_USER") && (
+          <>
+            <Route exact path="/menuItems" element={<MenuItemIndexPage />} />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_ADMIN") && (
+          <>
+            <Route
+              exact
+              path="/menuItems/edit/:id"
+              element={<MenuItemEditPage />}
+            />
+            <Route
+              exact
+              path="/menuItems/create"
+              element={<MenuItemCreatePage />}
             />
           </>
         )}
