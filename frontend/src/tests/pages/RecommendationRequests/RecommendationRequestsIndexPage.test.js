@@ -1,4 +1,3 @@
-
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import RecommendationRequestIndexPage from "main/pages/RecommendationRequests/RecommendationRequestsIndexPage";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -6,12 +5,10 @@ import { MemoryRouter } from "react-router-dom";
 import mockConsole from "jest-mock-console";
 import { recommendationRequestFixtures } from "fixtures/recommendationRequestFixtures";
 
-
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
-
 
 const mockToast = jest.fn();
 jest.mock("react-toastify", () => {
@@ -38,7 +35,6 @@ describe("RecommendationRequestsIndexPage tests", () => {
       .onGet("/api/systemInfo")
       .reply(200, systemInfoFixtures.showingNeither);
   };
-
 
   const setupAdminUser = () => {
     axiosMock.reset();
@@ -140,7 +136,6 @@ describe("RecommendationRequestsIndexPage tests", () => {
     axiosMock.onGet("/api/recommendationrequest/all").timeout();
 
     const restoreConsole = mockConsole();
-
 
     render(
       <QueryClientProvider client={queryClient}>
