@@ -3,11 +3,11 @@ import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { http, HttpResponse } from "msw";
 
-import UCSBOrganizationEditPage from "main/pages/UCSBOrganizations/UCSBOrganizationEditPage";
+import UCSBOrganizationEditPage from "main/pages/UCSBOrganization/UCSBOrganizationEditPage";
 import { ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures";
 
 export default {
-  title: "pages/UCSBOrganizations/UCSBOrganizationEditPage",
+  title: "pages/UCSBOrganization/UCSBOrganizationEditPage",
   component: UCSBOrganizationEditPage,
 };
 
