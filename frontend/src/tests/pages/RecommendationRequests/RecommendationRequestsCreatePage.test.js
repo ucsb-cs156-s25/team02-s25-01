@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import HelpRequestCreatePage from "main/pages/HelpRequest/HelpRequestCreatePage";
+import RecommendationRequestsCreatePage from "main/pages/RecommendationRequests/RecommendationRequestsCreatePage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 
@@ -32,7 +32,7 @@ jest.mock("react-router-dom", () => {
   };
 });
 
-describe("HelpRequestCreatePage tests", () => {
+describe("RecommendationRequestsCreatePage tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
 
   beforeEach(() => {
@@ -52,96 +52,102 @@ describe("HelpRequestCreatePage tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestCreatePage />
+          <RecommendationRequestsCreatePage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
 
     await waitFor(() => {
-      expect(screen.getByLabelText("Requester Email")).toBeInTheDocument();
+      expect(screen.getByLabelText("Explanation")).toBeInTheDocument();
     });
   });
 
-  test("on submit, makes request to backend, and redirects to /helprequest", async () => {
+  test("on submit, makes request to backend, and redirects to /recommendationrequest", async () => {
     const queryClient = new QueryClient();
-    const helprequest = {
-      id: 2,
-      requesterEmail: "hjin133@ucsb.edu",
-      teamId: "01",
-      tableOrBreakoutRoom: "table1",
-      requestTime: "2025-05-01T17:22:00",
-      explanation: "I got an error message",
-      solved: true,
+    const recommendationRequest = {
+      id: 3,
+      requesterEmail: "studentName@ucsb.edu",
+      professorEmail: "professorName@ucsb.edu",
+      explanation: "I need a letter of recommendation...",
+      dateRequested: "2025-01-01T00:00:12",
+      dateNeeded: "2025-05-01T00:00:12",
+      done: true,
     };
 
-    axiosMock.onPost("/api/helprequest/post").reply(202, helprequest);
-
+    axiosMock
+      .onPost("/api/recommendationrequest/post")
+      .reply(202, recommendationRequest);
 
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestCreatePage />
+          <RecommendationRequestsCreatePage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
 
     await waitFor(() => {
-      expect(screen.getByLabelText("Requester Email")).toBeInTheDocument();
+      expect(screen.getByLabelText("Explanation")).toBeInTheDocument();
     });
 
     const requesterEmailInput = screen.getByLabelText("Requester Email");
     expect(requesterEmailInput).toBeInTheDocument();
 
-    const teamIdInput = screen.getByLabelText("Team Id");
-    expect(teamIdInput).toBeInTheDocument();
-
-    const tableOrBreakoutRoomInput = screen.getByLabelText(
-      "Table Or Breakout Room",
-    );
-    expect(tableOrBreakoutRoomInput).toBeInTheDocument();
-
-    const requestTimeInput = screen.getByLabelText("Request Time (iso format)");
-    expect(requestTimeInput).toBeInTheDocument();
+    const professorEmailInput = screen.getByLabelText("Professor Email");
+    expect(professorEmailInput).toBeInTheDocument();
 
     const explanationInput = screen.getByLabelText("Explanation");
     expect(explanationInput).toBeInTheDocument();
 
-    const solvedInput = screen.getByLabelText("Solved");
-    expect(solvedInput).toBeInTheDocument();
+    const dateRequestedInput = screen.getByLabelText(
+      "Date Requested (iso format)",
+    );
+    expect(dateRequestedInput).toBeInTheDocument();
+
+    const dateNeededInput = screen.getByLabelText("Date Needed (iso format)");
+    expect(dateNeededInput).toBeInTheDocument();
+
+    const doneInput = screen.getByLabelText("Done");
+    expect(doneInput).toBeInTheDocument();
 
     const createButton = screen.getByText("Create");
     expect(createButton).toBeInTheDocument();
 
     fireEvent.change(requesterEmailInput, {
-      target: { value: "hjin133@ucsb.edu" },
+      target: { value: "studentName@ucsb.edu" },
     });
-    fireEvent.change(teamIdInput, { target: { value: "01" } });
-    fireEvent.change(tableOrBreakoutRoomInput, { target: { value: "table1" } });
-    fireEvent.change(requestTimeInput, {
-      target: { value: "2025-05-01T17:22:00" },
+    fireEvent.change(professorEmailInput, {
+      target: { value: "professorName@ucsb.edu" },
     });
     fireEvent.change(explanationInput, {
-      target: { value: "I got an error message" },
+      target: { value: "I need a letter of recommendation..." },
     });
-    fireEvent.click(solvedInput);
+    fireEvent.change(dateRequestedInput, {
+      target: { value: "2025-01-01T00:00:12" },
+    });
+    fireEvent.change(dateNeededInput, {
+      target: { value: "2025-05-01T00:00:12" },
+    });
+
+    fireEvent.click(doneInput);
 
     fireEvent.click(createButton);
 
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 
     expect(axiosMock.history.post[0].params).toEqual({
-      requesterEmail: "hjin133@ucsb.edu",
-      teamId: "01",
-      tableOrBreakoutRoom: "table1",
-      requestTime: "2025-05-01T17:22",
-      explanation: "I got an error message",
-      solved: true,
+      requesterEmail: "studentName@ucsb.edu",
+      professorEmail: "professorName@ucsb.edu",
+      explanation: "I need a letter of recommendation...",
+      dateRequested: "2025-01-01T00:00:12.000",
+      dateNeeded: "2025-05-01T00:00:12.000",
+      done: true,
     });
 
     // assert - check that the toast was called with the expected message
     expect(mockToast).toHaveBeenCalledWith(
-      "New helprequest Created - id: 2 requesterEmail: hjin133@ucsb.edu",
+      "New Recommendation Request Created - id: 3 explanation: I need a letter of recommendation...",
     );
-    expect(mockNavigate).toHaveBeenCalledWith({ to: "/helprequest" });
+    expect(mockNavigate).toHaveBeenCalledWith({ to: "/recommendationrequest" });
   });
 });
