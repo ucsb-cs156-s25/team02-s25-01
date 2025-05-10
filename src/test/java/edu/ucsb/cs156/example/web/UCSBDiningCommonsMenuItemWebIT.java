@@ -43,6 +43,7 @@ public class UCSBDiningCommonsMenuItemWebIT extends WebTestCase {
                 .hasText("chips");
         page.getByTestId("MenuItemTable-cell-row-0-col-Delete").click();
         assertThat(page.getByTestId("MenuItemTable-cell-row-0-col-name")).isVisible();
+        
     }
 
     @Test
