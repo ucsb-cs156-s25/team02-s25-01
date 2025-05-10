@@ -15,6 +15,10 @@ import PlaceholderIndexPage from "main/pages/Placeholder/PlaceholderIndexPage";
 import PlaceholderCreatePage from "main/pages/Placeholder/PlaceholderCreatePage";
 import PlaceholderEditPage from "main/pages/Placeholder/PlaceholderEditPage";
 
+import MenuItemIndexPage from "main/pages/MenuItems/MenuItemIndexPage";
+import MenuItemCreatePage from "main/pages/MenuItems/MenuItemCreatePage";
+import MenuItemEditPage from "main/pages/MenuItems/MenuItemEditPage";
+
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -93,6 +97,25 @@ function App() {
               exact
               path="/placeholder/create"
               element={<PlaceholderCreatePage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_USER") && (
+          <>
+            <Route exact path="/menuItems" element={<MenuItemIndexPage />} />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_ADMIN") && (
+          <>
+            <Route
+              exact
+              path="/menuItems/edit/:id"
+              element={<MenuItemEditPage />}
+            />
+            <Route
+              exact
+              path="/menuItems/create"
+              element={<MenuItemCreatePage />}
             />
           </>
         )}
