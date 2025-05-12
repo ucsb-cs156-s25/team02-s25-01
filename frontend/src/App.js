@@ -11,9 +11,25 @@ import RestaurantIndexPage from "main/pages/Restaurants/RestaurantIndexPage";
 import RestaurantCreatePage from "main/pages/Restaurants/RestaurantCreatePage";
 import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
 
-import PlaceholderIndexPage from "main/pages/Placeholder/PlaceholderIndexPage";
-import PlaceholderCreatePage from "main/pages/Placeholder/PlaceholderCreatePage";
-import PlaceholderEditPage from "main/pages/Placeholder/PlaceholderEditPage";
+import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";
+import UCSBOrganizationCreatePage from "main/pages/UCSBOrganization/UCSBOrganizationCreatePage";
+import UCSBOrganizationEditPage from "main/pages/UCSBOrganization/UCSBOrganizationEditPage";
+
+import HelpRequestIndexPage from "main/pages/HelpRequest/HelpRequestIndexPage";
+import HelpRequestCreatePage from "main/pages/HelpRequest/HelpRequestCreatePage";
+import HelpRequestEditPage from "main/pages/HelpRequest/HelpRequestEditPage";
+
+import RecommendationRequestsIndexPage from "main/pages/RecommendationRequests/RecommendationRequestsIndexPage";
+import RecommendationRequestsCreatePage from "main/pages/RecommendationRequests/RecommendationRequestsCreatePage";
+import RecommendationRequestsEditPage from "main/pages/RecommendationRequests/RecommendationRequestsEditPage";
+
+import MenuItemReviewsIndexPage from "main/pages/MenuItemReviews/MenuItemReviewsIndexPage";
+import MenuItemReviewsCreatePage from "main/pages/MenuItemReviews/MenuItemReviewsCreatePage";
+import MenuItemReviewsEditPage from "main/pages/MenuItemReviews/MenuItemReviewsEditPage";
+
+import MenuItemIndexPage from "main/pages/MenuItems/MenuItemIndexPage";
+import MenuItemCreatePage from "main/pages/MenuItems/MenuItemCreatePage";
+import MenuItemEditPage from "main/pages/MenuItems/MenuItemEditPage";
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
@@ -50,6 +66,54 @@ function App() {
             />
           </>
         )}
+
+        {hasRole(currentUser, "ROLE_USER") && (
+          <>
+
+            <Route
+              exact
+              path="/helprequest"
+              element={<HelpRequestIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_ADMIN") && (
+          <>
+            <Route
+              exact
+              path="/helprequest/edit/:id"
+              element={<HelpRequestEditPage />}
+            />
+            <Route
+              exact
+              path="/helprequest/create"
+              element={<HelpRequestCreatePage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_USER") && (
+          <>
+            <Route
+              exact
+              path="/recommendationrequest"
+              element={<RecommendationRequestsIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_ADMIN") && (
+          <>
+            <Route
+              exact
+              path="/recommendationrequest/edit/:id"
+              element={<RecommendationRequestsEditPage />}
+            />
+            <Route
+              exact
+              path="/recommendationrequest/create"
+              element={<RecommendationRequestsCreatePage />}
+            />
+          </>
+        )}
         {hasRole(currentUser, "ROLE_USER") && (
           <>
             <Route
@@ -77,8 +141,8 @@ function App() {
           <>
             <Route
               exact
-              path="/placeholder"
-              element={<PlaceholderIndexPage />}
+              path="/menuItemReviews"
+              element={<MenuItemReviewsIndexPage />}
             />
           </>
         )}
@@ -86,13 +150,55 @@ function App() {
           <>
             <Route
               exact
-              path="/placeholder/edit/:id"
-              element={<PlaceholderEditPage />}
+              path="/menuItemReviews/edit/:id"
+              element={<MenuItemReviewsEditPage />}
             />
             <Route
               exact
-              path="/placeholder/create"
-              element={<PlaceholderCreatePage />}
+              path="/menuItemReviews/create"
+              element={<MenuItemReviewsCreatePage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_USER") && (
+          <>
+            <Route
+              exact
+              path="/ucsborganization"
+              element={<UCSBOrganizationIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_ADMIN") && (
+          <>
+            <Route
+              exact
+              path="/ucsborganization/edit/:id"
+              element={<UCSBOrganizationEditPage />}
+            />
+            <Route
+              exact
+              path="/ucsborganization/create"
+              element={<UCSBOrganizationCreatePage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_USER") && (
+          <>
+            <Route exact path="/menuItems" element={<MenuItemIndexPage />} />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_ADMIN") && (
+          <>
+            <Route
+              exact
+              path="/menuItems/edit/:id"
+              element={<MenuItemEditPage />}
+            />
+            <Route
+              exact
+              path="/menuItems/create"
+              element={<MenuItemCreatePage />}
             />
           </>
         )}
