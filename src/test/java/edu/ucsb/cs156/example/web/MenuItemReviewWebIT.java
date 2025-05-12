@@ -71,4 +71,13 @@ public class MenuItemReviewWebIT extends WebTestCase {
         assertThat(page.getByText("Create MenuItemReview")).not().isVisible();
         assertThat(page.getByTestId("MenuItemReviewTable-cell-row-0-col-comments")).not().isVisible();
     }
+
+    @Test
+    public void admin_user_can_create_menuItemReview() throws Exception {
+        setupUser(true);
+
+        page.getByText("Menu Item Review").click();
+
+        assertThat(page.getByText("Create MenuItemReview")).isVisible();
+    }
 }
