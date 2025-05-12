@@ -30,9 +30,6 @@ import MenuItemReviewsEditPage from "main/pages/MenuItemReviews/MenuItemReviewsE
 import MenuItemIndexPage from "main/pages/MenuItems/MenuItemIndexPage";
 import MenuItemCreatePage from "main/pages/MenuItems/MenuItemCreatePage";
 import MenuItemEditPage from "main/pages/MenuItems/MenuItemEditPage";
-import ArticlesIndexPage from "main/pages/Articles/ArticlesIndexPage";
-import ArticlesCreatePage from "main/pages/Articles/ArticlesCreatePage";
-import ArticlesEditPage from "main/pages/Articles/ArticlesEditPage";
 
 import PlaceholderIndexPage from "main/pages/Placeholder/PlaceholderIndexPage";
 import PlaceholderCreatePage from "main/pages/Placeholder/PlaceholderCreatePage";
