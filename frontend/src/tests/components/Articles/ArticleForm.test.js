@@ -21,7 +21,7 @@ describe("ArticleForm tests", () => {
     "Url",
     "Explanation",
     "Email",
-    "Date added (in UTC)",
+    "Date Added (in UTC)",
   ];
   const testId = "ArticleForm";
 

@@ -121,7 +121,7 @@ function ArticleForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="dateAdded">Date added (in UTC)</Form.Label>
+        <Form.Label htmlFor="dateAdded">Date Added (in UTC)</Form.Label>
         <Form.Control
           //   data-testid={testIdPrefix + "-dateAdded"}
           id="dateAdded"

@@ -29,7 +29,6 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -78,7 +77,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
     public void logged_in_user_can_get_all_articles() throws Exception {
 
         // arrange
-        ZonedDateTime zdt1 = ZonedDateTime.parse("2025-04-25T00:30:19.455Z");
+        LocalDateTime zdt1 = LocalDateTime.parse("2025-04-25T00:30:19");
 
         Article article1 = Article.builder()
                 .title("test_title")
@@ -110,7 +109,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
     public void an_admin_user_can_post_a_new_article() throws Exception {
         // arrange
 
-        ZonedDateTime zdt1 = ZonedDateTime.parse("2025-04-25T00:30:19.455Z");
+        LocalDateTime zdt1 = LocalDateTime.parse("2025-04-25T00:30:19");
         Article article1 = Article.builder()
                 .title("test_title")
                 .url("https://github.com/ucsb-cs156-s25/team01-s25-01")
@@ -123,7 +122,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
 
         // act
         MvcResult response = mockMvc.perform(
-                post("/api/articles/post?title=test_title&url=https://github.com/ucsb-cs156-s25/team01-s25-01&explanation=testrepo&email=ranchen@ucsb.edu&dateAdded=2025-04-25T00:30:19.455Z")
+                post("/api/articles/post?title=test_title&url=https://github.com/ucsb-cs156-s25/team01-s25-01&explanation=testrepo&email=ranchen@ucsb.edu&dateAdded=2025-04-25T00:30:19")
                         .with(csrf()))
                 .andExpect(status().isOk()).andReturn();
 
@@ -139,7 +138,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
     public void test_that_logged_in_user_can_get_by_id_when_the_id_exists() throws Exception {
 
         // arrange
-        ZonedDateTime zdt1 = ZonedDateTime.parse("2025-04-25T00:30:19.455Z");
+        LocalDateTime zdt1 = LocalDateTime.parse("2025-04-25T00:30:19");
         Article article1 = Article.builder()
                 .title("test_title")
                 .url("https://github.com/ucsb-cs156-s25/team01-s25-01")
@@ -193,7 +192,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
     public void admin_can_edit_an_existing_article() throws Exception {
         // arrange
 
-        ZonedDateTime zdt1 = ZonedDateTime.parse("2025-04-25T00:30:19.455Z");
+        LocalDateTime zdt1 = LocalDateTime.parse("2025-04-25T00:30:19");
         Article article1 = Article.builder()
                 .title("test_title")
                 .url("https://github.com/ucsb-cs156-s25/team01-s25-01")
@@ -202,7 +201,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
                 .dateAdded(zdt1)
                 .build();
 
-        ZonedDateTime zdt2 = ZonedDateTime.parse("2025-04-26T00:30:19.455Z");
+        LocalDateTime zdt2 = LocalDateTime.parse("2025-04-26T00:30:19");
         Article article2 = Article.builder()
                 .title("test_title2")
                 .url("https://github.com/ucsb-cs156-s25/team01-s25-012")
@@ -236,7 +235,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
     public void admin_cannot_edit_article_that_does_not_exist() throws Exception {
         // arrange
 
-        ZonedDateTime zdt1 = ZonedDateTime.parse("2025-04-25T00:30:19.455Z");
+        LocalDateTime zdt1 = LocalDateTime.parse("2025-04-25T00:30:19");
         Article article1 = Article.builder()
                 .title("test_title")
                 .url("https://github.com/ucsb-cs156-s25/team01-s25-01")
@@ -270,7 +269,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
     public void admin_can_delete_an_article() throws Exception {
         // arrange
 
-        ZonedDateTime zdt1 = ZonedDateTime.parse("2025-04-25T00:30:19.455Z");
+        LocalDateTime zdt1 = LocalDateTime.parse("2025-04-25T00:30:19");
         Article article1 = Article.builder()
                 .title("test_title")
                 .url("https://github.com/ucsb-cs156-s25/team01-s25-01")

@@ -1,5 +1,6 @@
 package edu.ucsb.cs156.example.entities;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 import jakarta.persistence.Entity;
@@ -27,6 +28,6 @@ public class Article {
     
     private String explanation;
     private String email;
-    ZonedDateTime dateAdded;
+    LocalDateTime dateAdded;
 
 }
