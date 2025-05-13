@@ -1,6 +1,10 @@
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
+const stripMillis = (s) =>
+    typeof s === "string" ? s.replace(/\.000?$/, "") : s;
 
 function ArticleForm({
   initialContents,
@@ -10,9 +14,24 @@ function ArticleForm({
   // Stryker disable all
   const {
     register,
+    reset,
     formState: { errors },
     handleSubmit,
-  } = useForm({ initialContents });
+//   }  = useForm({ defaultValues: initialContents || {} });
+  } = useForm({
+      defaultValues: initialContents
+        ? { ...initialContents, dateAdded: stripMillis(initialContents.dateAdded) }
+        : {},
+    });
+
+    useEffect(() => {
+        if (initialContents) {
+          reset({
+            ...initialContents,
+            dateAdded: stripMillis(initialContents.dateAdded)
+          });
+        }
+      }, [initialContents, reset]);
   // Stryker restore all
 
   const navigate = useNavigate();
