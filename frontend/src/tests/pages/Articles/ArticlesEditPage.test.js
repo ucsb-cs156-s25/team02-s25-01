@@ -35,7 +35,7 @@ jest.mock("react-router-dom", () => {
   };
 });
 
-describe("ArticleEditPage tests", () => {
+describe("ArticlesEditPage tests", () => {
   describe("when the backend doesn't return data", () => {
     const axiosMock = new AxiosMockAdapter(axios);
 
@@ -63,7 +63,7 @@ describe("ArticleEditPage tests", () => {
         </QueryClientProvider>,
       );
       await screen.findByText("Edit Article");
-      expect(screen.queryByTestId("Article-name")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("Article-title")).not.toBeInTheDocument();
       restoreConsole();
     });
   });
@@ -86,69 +86,92 @@ describe("ArticleEditPage tests", () => {
         url: "google.com",
         explanation: "google search",
       email: "some@gmail.com",
-      dateAdded : "2025-05-02T03:39:16Z"
+      dateAdded : "2025-05-02T03:39:16"
       });
       axiosMock.onPut("/api/articles").reply(200, {
         id: "17",
-        title: "test title",
-        url: "google.com",
-        explanation: "google search",
-      email: "some@gmail.com",
-      dateAdded : "2025-05-02T03:39:16Z"
+        title: "test title1",
+        url: "google1.com",
+        explanation: "google search1",
+      email: "some1@gmail.com",
+      dateAdded : "2025-05-02T03:39:17"
       });
     });
 
-    // const queryClient = new QueryClient();
+    const queryClient = new QueryClient();
 
-    // test("Is populated with the data provided", async () => {
-    //   render(
-    //     <QueryClientProvider client={queryClient}>
-    //       <MemoryRouter>
-    //         <ArticlesEditPage />
-    //       </MemoryRouter>
-    //     </QueryClientProvider>,
-    //   );
+    test("Is populated with the data provided", async () => {
+      render(
+        <QueryClientProvider client={queryClient}>
+          <MemoryRouter>
+            <ArticlesEditPage />
+          </MemoryRouter>
+        </QueryClientProvider>,
+      );
 
-    //   await screen.findByTestId("ArticleForm-id");
+      await screen.findByTestId("ArticleForm-id");
 
-    //   const idField = screen.getByTestId("ArticleForm-id");
-    //   const nameField = screen.getByTestId("ArticleForm-name");
-    //   const descriptionField = screen.getByTestId("ArticleForm-description");
-    //   const submitButton = screen.getByTestId("ArticleForm-submit");
+      const idField = screen.getByTestId("ArticleForm-id");
+      const titleField = screen.getByTestId("ArticleForm-title");
+      const urlField = screen.getByTestId("ArticleForm-url");
+      const explanationField = screen.getByTestId("ArticleForm-explanation");
+      const emailField = screen.getByTestId("ArticleForm-email");
+      const dateAddedField = screen.getByTestId("ArticleForm-dateAdded");
 
-    //   expect(idField).toBeInTheDocument();
-    //   expect(idField).toHaveValue("17");
-    //   expect(nameField).toBeInTheDocument();
-    //   expect(nameField).toHaveValue("Freebirds");
-    //   expect(descriptionField).toBeInTheDocument();
-    //   expect(descriptionField).toHaveValue("Burritos");
+      expect(idField).toBeInTheDocument();
+      expect(idField).toHaveValue("17");
+      expect(titleField).toBeInTheDocument();
+      expect(titleField).toHaveValue("test title");
+      expect(explanationField).toBeInTheDocument();
+      expect(explanationField).toHaveValue("google search");
+      expect(urlField).toBeInTheDocument();
+      expect(urlField).toHaveValue("google.com");
+      expect(emailField).toBeInTheDocument();
+      expect(emailField).toHaveValue("some@gmail.com");
+      expect(dateAddedField).toBeInTheDocument();
+      expect(dateAddedField).toHaveValue("2025-05-02T03:39:16");
+      
 
-    //   expect(submitButton).toHaveTextContent("Update");
+      expect(submitButton).toHaveTextContent("Update");
 
-    //   fireEvent.change(nameField, {
-    //     target: { value: "Freebirds World Burrito" },
-    //   });
-    //   fireEvent.change(descriptionField, {
-    //     target: { value: "Totally Giant Burritos" },
-    //   });
-    //   fireEvent.click(submitButton);
+      fireEvent.change(titleField, {
+        target: { value: "test title1" },
+      });
+      fireEvent.change(explanationField, {
+        target: { value: "google search1" },
+      });
+      fireEvent.change(urlField, {
+        target: { value: "google1.com" },
+      });
+      fireEvent.change(emailField, {
+        target: { value: "some1@gmail.com" },
+      });
+      fireEvent.change(dateAddedField, {
+        target: { value: "2025-05-02T03:39:17" },
+      });
+      
+      fireEvent.click(submitButton);
 
-    //   await waitFor(() => expect(mockToast).toBeCalled());
-    //   expect(mockToast).toBeCalledWith(
-    //     "Article Updated - id: 17 name: Freebirds World Burrito",
-    //   );
+      await waitFor(() => expect(mockToast).toBeCalled());
+      expect(mockToast).toBeCalledWith(
+        "Article Updated - id: 17 title: test title1",
+      );
 
-    //   expect(mockNavigate).toBeCalledWith({ to: "/articles" });
+      expect(mockNavigate).toBeCalledWith({ to: "/articles" });
 
-    //   expect(axiosMock.history.put.length).toBe(1); // times called
-    //   expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
-    //   expect(axiosMock.history.put[0].data).toBe(
-    //     JSON.stringify({
-    //       name: "Freebirds World Burrito",
-    //       description: "Totally Giant Burritos",
-    //     }),
-    //   ); // posted object
-    // });
+      expect(axiosMock.history.put.length).toBe(1); // times called
+      expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
+      expect(axiosMock.history.put[0].data).toBe(
+        JSON.stringify({
+            id: "17",
+            title: "test title1",
+            url: "google1.com",
+            explanation: "google search1",
+          email: "some1@gmail.com",
+          dateAdded : "2025-05-02T03:39:17"
+        }),
+      ); // posted object
+    });
 
     // test("Changes when you click Update", async () => {
     //   render(
