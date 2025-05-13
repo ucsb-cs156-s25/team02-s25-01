@@ -44,7 +44,7 @@ public class UCSBOrganizationIT {
         public GrantedAuthoritiesService grantedAuthoritiesService;
 
         @Autowired
-        UCSBOrganizationRepository ucsbOrganizationsRepository;
+        UCSBOrganizationRepository ucsbOrganizationRepository;
 
         @Autowired
         public MockMvc mockMvc;
@@ -67,7 +67,7 @@ public class UCSBOrganizationIT {
                 .inactive(true)
                 .build();
                                 
-                ucsbOrganizationsRepository.save(organization1);
+                ucsbOrganizationRepository.save(organization1);
 
                 // act
                 MvcResult response = mockMvc.perform(get("/api/ucsborganizations?orgCode=String"))
